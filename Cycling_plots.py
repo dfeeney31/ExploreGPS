@@ -53,9 +53,7 @@ df = pd.DataFrame(
      'Speed': speed_1,
      'Distance': dist_1,
      'Power': power,
-     'Elevation': altitude_1,
-     'Latitude': pos_lat,
-     'Longitude': pos_long
+     'Elevation': altitude_1
     })
 
 len_lat = len(pos_lat)
@@ -68,7 +66,8 @@ map_df = pd.DataFrame(
      'Longitude': pos_long,
      'Speed': speed_ltd
     })
-
+map_df['Latitude'] = map_df['Latitude']*(180/(2**31))
+map_df['Longitude'] = map_df['Longitude']*(180/(2**31))
 
 #use lat and longitude to get map. Not correctly implemented yet
 _, angles = sw.dist(map_df['Latitude'], map_df['Longitude'])
@@ -91,7 +90,7 @@ sub = 10
 ax = plt.plot(map_df.Longitude, map_df.Latitude, 'b') # Draw blue line
 mplleaflet.show()
 
-#end of mapping segment. TODO fix this.
+#end of mapping segment.
 
 #Cycling here
 fig=plt.figure(figsize=(12, 9), dpi= 80, facecolor='w', edgecolor='k')
